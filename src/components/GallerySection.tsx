@@ -3,8 +3,11 @@ import { TranslationSet } from '../translations';
 import { X, ZoomIn, Eye } from 'lucide-react';
 
 // Import generated asset paths
-import clinicInterior from '../assets/images/clinic_interior_1782885195016.jpg';
+import clinicInterior from '../assets/images/clinic_waiting_area_latest_1782910382551.jpg';
 import heroSlitLamp from '../assets/images/hero_slit_lamp_1782885157457.jpg';
+import galleryAutorefractor from '../assets/images/gallery_autorefractor_1782909980308.jpg';
+import ophthalmoscopeInspection from '../assets/images/ophthalmoscope_inspection_latest_1782910757297.jpg';
+import spectacleShowroomCollection from '../assets/images/spectacle_showroom_collection_1782913422862.jpg';
 
 interface GallerySectionProps {
   lang: 'en' | 'te';
@@ -38,7 +41,7 @@ export default function GallerySection({ lang, t }: GallerySectionProps) {
       }
     },
     {
-      src: "https://picsum.photos/seed/eyescan/800/600",
+      src: galleryAutorefractor,
       title: {
         en: "Autorefractor Vision Diagnostics",
         te: "కంప్యూటర్ కంటి పరీక్ష పరికరం"
@@ -49,7 +52,7 @@ export default function GallerySection({ lang, t }: GallerySectionProps) {
       }
     },
     {
-      src: "https://picsum.photos/seed/optometrydevice/800/600",
+      src: ophthalmoscopeInspection,
       title: {
         en: "Ophthalmoscope Inspection",
         te: "ఆఫ్తాల్మోస్కోపిక్ పరీక్షా పరికరాలు"
@@ -60,18 +63,7 @@ export default function GallerySection({ lang, t }: GallerySectionProps) {
       }
     },
     {
-      src: "https://picsum.photos/seed/clinicroom/800/600",
-      title: {
-        en: "Consultation & Exam Room",
-        te: "వైద్యుల సంప్రదింపు గది"
-      },
-      desc: {
-        en: "Private, clean clinical rooms for personal diagnostics and doctor analysis.",
-        te: "వ్యక్తిగత కంటి సమస్యలను చర్చించడానికి సురక్షితమైన, ప్రశాంతమైన గది."
-      }
-    },
-    {
-      src: "https://picsum.photos/seed/spectacleshop/800/600",
+      src: spectacleShowroomCollection,
       title: {
         en: "Spectacle & Frame Collection",
         te: "కళ్లజోళ్లు & ఫ్రేమ్స్ కలెక్షన్"

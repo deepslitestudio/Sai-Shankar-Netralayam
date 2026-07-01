@@ -1,7 +1,7 @@
 import { UserCheck, Star, Award, ShieldCheck } from 'lucide-react';
 import { TranslationSet } from '../translations';
-// Exact path of the generated doctor portrait
-import doctorImage from '../assets/images/attached_doctor_portrait_1782894513184.jpg';
+// Exact path of the uploaded doctor portrait
+import doctorImage from '../assets/images/clinic_consultation_room_doctor.png';
 
 interface DoctorSectionProps {
   lang: 'en' | 'te';
