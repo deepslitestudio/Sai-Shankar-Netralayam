@@ -1,0 +1,6 @@
+{
+  "name": "Sai Shankar Netralayam",
+  "description": "Mobile-first, bilingual (English + Telugu) website and patient booking portal for Sai Shankar Netralayam Eye Hospital in Yeleswaram, AP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

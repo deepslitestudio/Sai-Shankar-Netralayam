@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Information associated with a registered patient",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The unique Firebase Auth user ID" },
+        "displayName": { "type": "string", "description": "The patient's display name" },
+        "email": { "type": "string", "format": "email", "description": "The email address of the patient" },
+        "phone": { "type": "string", "description": "Phone number for notifications and contact" },
+        "age": { "type": "integer", "description": "Patient's age" },
+        "location": { "type": "string", "description": "Patient's residential location/village" },
+        "preferredLanguage": { "type": "string", "enum": ["en", "te"], "description": "Preferred language for the UI" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "The time the profile was created" }
+      },
+      "required": ["userId", "displayName", "email"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "An appointment booking made by a patient",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the appointment" },
+        "userId": { "type": "string", "description": "The ID of the user who booked the appointment" },
+        "patientName": { "type": "string", "description": "The full name of the patient" },
+        "phone": { "type": "string", "description": "Contact phone number for confirmation" },
+        "preferredDate": { "type": "string", "description": "Preferred date in YYYY-MM-DD format" },
+        "preferredTimeSlot": { "type": "string", "description": "Preferred time slot (e.g. Morning, Afternoon)" },
+        "serviceId": { "type": "string", "description": "The ID of the service/treatment category" },
+        "symptoms": { "type": "string", "description": "Brief description of symptoms or request notes" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Status of the appointment" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last updated timestamp" }
+      },
+      "required": ["id", "userId", "patientName", "phone", "preferredDate", "status", "createdAt", "updatedAt"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Patient review and feedback",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique testimonial ID" },
+        "userId": { "type": "string", "description": "The unique Firebase Auth user ID of the reviewer" },
+        "authorName": { "type": "string", "description": "The patient's name to display" },
+        "rating": { "type": "integer", "description": "Rating in stars (1-5)" },
+        "content": { "type": "string", "description": "The testimonial text in the language written" },
+        "location": { "type": "string", "description": "Patient's village or locality (e.g. Yeleswaram)" },
+        "isApproved": { "type": "boolean", "description": "Whether the review is moderated and approved for display" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Submission date" }
+      },
+      "required": ["id", "userId", "authorName", "rating", "content", "isApproved", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profiles with their PII isolated/protected by ownership rules"
+    },
+    "appointments/{appointmentId}": {
+      "schema": "Appointment",
+      "description": "Booked appointments of the eye hospital"
+    },
+    "testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Patient feedback and testimonials for Sai Shankar Netralayam"
+    }
+  }
+}

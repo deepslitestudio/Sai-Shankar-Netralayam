@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Pragati+Narrow:wght@400;700&family=Ramabhadra&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Noto Sans Telugu", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-ramabhadra: "Ramabhadra", sans-serif;
+  --font-pragati: "Pragati Narrow", sans-serif;
+  --font-noto-telugu: "Noto Sans Telugu", sans-serif;
+
+  /* Natural Tones - Slate remapping for soft sage-gray elements */
+  --color-slate-50: #F4F7F6;
+  --color-slate-100: #E8F0EE;
+  --color-slate-200: #D1D9D6;
+  --color-slate-300: #B0BEC5;
+  --color-slate-400: #90A4AE;
+  --color-slate-500: #667B74;
+  --color-slate-600: #546E7A;
+  --color-slate-700: #37474F;
+  --color-slate-800: #2C3E50;
+  --color-slate-900: #1A2E35;
+  --color-slate-950: #0F1B20;
+
+  /* Natural Tones - Teal/Blue remapping for primary/secondary clinical trust */
+  --color-teal-50: #E0F2F1;
+  --color-teal-100: #B2DFDB;
+  --color-teal-200: #80CBC4;
+  --color-teal-300: #4DB6AC;
+  --color-teal-400: #26A69A;
+  --color-teal-500: #00796B;
+  --color-teal-600: #0077B6;
+  --color-teal-700: #004B6D;
+  --color-teal-800: #00364F;
+  --color-teal-900: #002233;
+}
+
+/* Base style overrides to support mobile fluid touch targets */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, a {
+  min-height: 44px;
+}
+
+/* Telugu language specific styling: Headings -> Pragati Narrow, Body -> Noto Sans Telugu */
+.lang-te {
+  --font-sans: "Noto Sans Telugu", "Inter", sans-serif;
+  font-family: var(--font-noto-telugu);
+}
+
+.lang-te h1,
+.lang-te h2,
+.lang-te h3,
+.lang-te h4,
+.lang-te h5,
+.lang-te h6,
+.lang-te .font-heading {
+  font-family: var(--font-pragati);
+}

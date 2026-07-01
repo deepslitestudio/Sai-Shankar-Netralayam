@@ -1,0 +1,157 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // ==========================================
+    // GLOBAL PRIMITIVES & HELPERS
+    // ==========================================
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Admin conceptual check. The email innosparc.org@gmail.com is bootstrapped from the workspace context.
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'innosparc.org@gmail.com' && request.auth.token.email_verified == true
+      );
+    }
+
+    // ==========================================
+    // ENTITY VALIDATION BLUEPRINTS
+    // ==========================================
+
+    function isValidUserProfile(data) {
+      return data.userId == request.auth.uid
+        && data.displayName is string && data.displayName.size() > 0 && data.displayName.size() <= 100
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 150
+        && (!('phone' in data) || (data.phone is string && data.phone.size() <= 20))
+        && (!('age' in data) || (data.age is int && data.age >= 0 && data.age <= 120))
+        && (!('location' in data) || (data.location is string && data.location.size() <= 200))
+        && (!('preferredLanguage' in data) || (data.preferredLanguage in ['en', 'te']));
+    }
+
+    function isValidAppointment(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.userId == request.auth.uid
+        && data.patientName is string && data.patientName.size() > 0 && data.patientName.size() <= 100
+        && data.phone is string && data.phone.size() > 0 && data.phone.size() <= 20
+        && data.preferredDate is string && data.preferredDate.size() <= 20
+        && data.preferredTimeSlot is string && data.preferredTimeSlot.size() <= 50
+        && data.serviceId is string && data.serviceId.size() <= 50
+        && (!('symptoms' in data) || (data.symptoms is string && data.symptoms.size() <= 1000))
+        && data.status in ['pending', 'confirmed', 'cancelled'];
+    }
+
+    function isValidTestimonial(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.userId == request.auth.uid
+        && data.authorName is string && data.authorName.size() > 0 && data.authorName.size() <= 100
+        && data.rating is int && data.rating >= 1 && data.rating <= 5
+        && data.content is string && data.content.size() > 0 && data.content.size() <= 1000
+        && (!('location' in data) || (data.location is string && data.location.size() <= 100))
+        && data.isApproved is bool;
+    }
+
+    // ==========================================
+    // COLLECTION MATCH RULES
+    // ==========================================
+
+    // 1. User Profiles
+    match /users/{userId} {
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+      
+      allow create: if isSignedIn() && isValidId(userId) && request.auth.uid == userId 
+        && isValidUserProfile(incoming()) 
+        && incoming().createdAt == request.time;
+        
+      allow update: if isSignedIn() && isValidId(userId) && request.auth.uid == userId 
+        && isValidUserProfile(incoming())
+        && incoming().userId == existing().userId
+        && incoming().createdAt == existing().createdAt
+        && (incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'phone', 'age', 'location', 'preferredLanguage']));
+        
+      allow delete: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+    }
+
+    // 2. Appointments
+    match /appointments/{appointmentId} {
+      allow get: if isSignedIn() && isValidId(appointmentId) && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      allow create: if isSignedIn() && isValidId(appointmentId) 
+        && isValidAppointment(incoming()) 
+        && incoming().status == 'pending'
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+        
+      allow update: if isSignedIn() && isValidId(appointmentId)
+        && (
+          isAdmin() || (
+            existing().userId == request.auth.uid 
+            && isValidAppointment(incoming())
+            && incoming().userId == existing().userId
+            && incoming().createdAt == existing().createdAt
+            && incoming().updatedAt == request.time
+            && (
+              // Action 1: Patient cancels appointment
+              (incoming().status == 'cancelled' && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt'])) ||
+              // Action 2: Patient updates details
+              (incoming().status == 'pending' && incoming().diff(existing()).affectedKeys().hasOnly(['patientName', 'phone', 'preferredDate', 'preferredTimeSlot', 'serviceId', 'symptoms', 'updatedAt']))
+            )
+          )
+        );
+        
+      allow delete: if isSignedIn() && isValidId(appointmentId) && (existing().userId == request.auth.uid || isAdmin());
+    }
+
+    // 3. Testimonials
+    match /testimonials/{testimonialId} {
+      allow get: if existing().isApproved == true;
+      allow get: if isSignedIn() && (existing().userId == request.auth.uid || isAdmin());
+      allow list: if resource.data.isApproved == true;
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      allow create: if isSignedIn() && isValidId(testimonialId)
+        && isValidTestimonial(incoming())
+        && incoming().isApproved == false
+        && incoming().createdAt == request.time;
+        
+      allow update: if isSignedIn() && isValidId(testimonialId)
+        && (
+          isAdmin() || (
+            existing().userId == request.auth.uid
+            && isValidTestimonial(incoming())
+            && incoming().userId == existing().userId
+            && incoming().createdAt == existing().createdAt
+            && incoming().isApproved == false
+            && (incoming().diff(existing()).affectedKeys().hasOnly(['authorName', 'rating', 'content', 'location']))
+          )
+        );
+        
+      allow delete: if isSignedIn() && isValidId(testimonialId) && (existing().userId == request.auth.uid || isAdmin());
+    }
+  }
+}
