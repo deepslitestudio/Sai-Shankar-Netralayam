@@ -93,10 +93,10 @@ export const translations: Record<'en' | 'te', TranslationSet> = {
     affordableTitle: "Affordable Care",
     affordableDesc: "Transparent pricing models making top-tier ophthalmological treatment accessible for everyone.",
     doctorSectionTitle: "Meet Our Doctor",
-    doctorTitle: "Mr. Anusuri Nageswar",
-    doctorQualification: "Ln. Anusuri Nageswarao, B.Opt, Specialist Optometrist",
+    doctorTitle: "Mr. Ln Nageswararao Anusuri",
+    doctorQualification: "B.Optom , Senior Optometrist",
     doctorSpecialization: "Ophthalmology & Specialist in Optometry Care",
-    doctorBio: "Dedicated to restoring and maintaining excellent vision health, Mr. Anusuri Nageswar combines deep optometrist expertise with a warm, patient-first approach. By understanding each patient's individual symptoms and employing advanced clinical procedures, our hospital guarantees precision, care, and reliable recovery.",
+    doctorBio: "Dedicated to restoring and maintaining excellent vision health, Mr. Ln Nageswararao Anusuri combines deep optometrist expertise with a warm, patient-first approach. By understanding each patient's individual symptoms and employing advanced clinical procedures, our hospital guarantees precision, care, and reliable recovery.",
     trustBadgeTitle: "Your Health, Our Priority",
     trustBadgeDesc: "Trusted by 1000+ local patients for clear, healthier vision.",
     servicesTitle: "Our Services",
@@ -169,8 +169,8 @@ export const translations: Record<'en' | 'te', TranslationSet> = {
     affordableTitle: "అందుబాటులో ఉన్న చికిత్స",
     affordableDesc: "అత్యుత్తమ నాణ్యమైన కంటి వైద్యాన్ని అందరికీ అందుబాటులో ఉండేలా తక్కువ ఖర్చుతో అందిస్తున్నాము.",
     doctorSectionTitle: "మా వైద్యులు",
-    doctorTitle: "మిస్టర్ అనుసూరి నాగేశ్వర్",
-    doctorQualification: "ఎల్.ఎన్. అనుసూరి నాగేశ్వరరావు, బి.ఆప్ట్, స్పెషలిస్ట్ ఆప్టోమెట్రిస్ట్",
+    doctorTitle: "మిస్టర్ ఎల్.ఎన్. నాగేశ్వరరావు అనుసూరి",
+    doctorQualification: "బి.ఆప్టమ్, సీనియర్ ఆప్టోమెట్రిస్ట్",
     doctorSpecialization: "కంటి వైద్య నిపుణులు & ఆప్టోమెట్రీ కేర్ స్పెషలిస్ట్",
     doctorBio: "కంటి సమస్యలను సద్భావంతో అర్థం చేసుకొని, ఆధునిక వైద్య పద్ధతులతో సరైన చికిత్స అందించడం మా వైద్యుల ప్రత్యేకత. రోగుల సమస్యలకు శాశ్వత పరిష్కారం చూపిస్తూ, కంటి చూపును రక్షించడమే మా లక్ష్యం. ప్రతి రోగి పట్ల ప్రత్యేక శ్రద్ధ వహించి నాణ్యమైన సేవలను అందిస్తారు.",
     trustBadgeTitle: "మీ ఆరోగ్యమే మా ప్రాధాన్యత",
@@ -339,8 +339,8 @@ export const whyChooseData: WhyChooseUsItem[] = [
       te: "అనుభవజ్ఞులైన వైద్యులు"
     },
     description: {
-      en: "Led by Mr. Anusuri Nageswar with over 10+ years of clinical vision care expertise treating patients with compassion.",
-      te: "కంటి వైద్య రంగంలో పది సంవత్సరాలకు పైగా విస్తృత అనుభవం ఉన్న నిపుణులైన డాక్టర్ ద్వారా సురక్షితమైన కంటి వైద్య సేవలు."
+      en: "Led by Mr. Ln Nageswararao Anusuri with over 25+ years of clinical vision care expertise treating patients with compassion.",
+      te: "కంటి వైద్య రంగంలో 25 సంవత్సరాలకు పైగా విస్తృత అనుభవం ఉన్న నిపుణులైన డాక్టర్ ఎల్.ఎన్. నాగేశ్వరరావు అనుసూరి ద్వారా సురక్షితమైన కంటి వైద్య సేవలు."
     },
     icon: "UserCheck"
   },

@@ -32,7 +32,7 @@ export default function DoctorSection({ lang, t }: DoctorSectionProps) {
                 {/* Overlay Experience tag */}
                 <div className="absolute bottom-6 right-6 bg-teal-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg flex items-center space-x-1">
                   <Star className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300" />
-                  <span>{lang === 'en' ? '10+ Years Exp.' : '10+ సం. అనుభవం'}</span>
+                  <span>{lang === 'en' ? '25+ Years Exp.' : '25+ సం. అనుభవం'}</span>
                 </div>
               </div>
             </div>
@@ -44,10 +44,10 @@ export default function DoctorSection({ lang, t }: DoctorSectionProps) {
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
-                  {lang === 'en' ? 'B.Opt Specialist' : 'బి.ఆప్ట్ స్పెషలిస్ట్'}
+                  {lang === 'en' ? 'Senior Optometrist' : 'సీనియర్ ఆప్టోమెట్రిస్ట్'}
                 </p>
                 <p className="text-xs text-slate-500 font-sans">
-                  {lang === 'en' ? 'Experienced Clinical Optometry' : 'కంటి సంరక్షణ మరియు రోగ నిర్ధారణ నిపుణులు'}
+                  {lang === 'en' ? 'B.Optom Specialist' : 'బి.ఆప్టమ్ స్పెషలిస్ట్'}
                 </p>
               </div>
             </div>

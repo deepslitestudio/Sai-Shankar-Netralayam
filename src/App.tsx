@@ -12,7 +12,8 @@ import {
   ChevronRight,
   MapPin,
   Clock,
-  ArrowRight
+  ArrowRight,
+  Users
 } from 'lucide-react';
 
 import { translations, whyChooseData, servicesData } from './translations';
@@ -25,6 +26,7 @@ import TestimonialsSection from './components/TestimonialsSection';
 // Import assets
 import logoImage from './assets/images/hospital_logo_1782885175992.jpg';
 import heroBgImage from './assets/images/hero_slit_lamp_1782885157457.jpg';
+import eyeSurgeryTrustSuccess from './assets/images/eye_surgery_trust_success_1782917986784.jpg';
 
 export default function App() {
   const [lang, setLang] = useState<'en' | 'te'>('te');
@@ -403,6 +405,37 @@ export default function App() {
               </a>
             </div>
 
+            {/* Highlight curved box of 1 Lakh+ OP's (Outpatients) */}
+            <motion.div
+              className="mt-8 p-4 rounded-2xl bg-slate-950/65 backdrop-blur-md border border-teal-500/20 shadow-xl shadow-black/30 max-w-sm flex items-center space-x-4 relative overflow-hidden group select-none"
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: 1, y: [0, -8, 0] }}
+              transition={{
+                opacity: { duration: 0.6 },
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+            >
+              <div className="bg-teal-950/80 border border-teal-500/20 p-2.5 rounded-xl shrink-0 shadow-md">
+                <Users className="w-5 h-5 text-yellow-300 shrink-0 animate-pulse" />
+              </div>
+              
+              <div className="flex flex-col text-left">
+                <span className="text-xl sm:text-2xl font-black tracking-tight">
+                  <span className="text-yellow-300 font-black drop-shadow-[0_0_12px_rgba(253,224,71,0.8)]">
+                    {lang === 'en' ? '1 Lakh+' : '1 లక్ష+'}
+                  </span>
+                  <span className="text-slate-100 font-bold ml-1">{lang === 'en' ? " OP's" : ' OPలు'}</span>
+                </span>
+                <span className="text-[11px] font-extrabold text-slate-300 tracking-wider uppercase font-sans">
+                  {lang === 'en' ? 'Outpatients Treated' : 'విజయవంతమైన కంటి సంరక్షణ'}
+                </span>
+              </div>
+            </motion.div>
+
           </div>
         </div>
 
@@ -508,6 +541,24 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Neon Showcase image under the About Us section with Floating Animation & Neon stroke highlight */}
+          <motion.div
+            className="mt-16 relative rounded-3xl p-[3px] bg-gradient-to-r from-teal-400 via-cyan-400 via-blue-500 to-indigo-500 shadow-[0_0_35px_rgba(20,184,166,0.4)] border border-teal-200/20 overflow-hidden"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="relative rounded-[22px] overflow-hidden bg-slate-950">
+              <img
+                src={eyeSurgeryTrustSuccess}
+                alt={lang === 'en' ? "5000+ Eye Surgeries & 25+ Years of Trust" : "5000+ కంటి శస్త్రచికిత్సలు & 25+ సంవత్సరాల నమ్మకం"}
+                className="w-full h-auto object-cover opacity-95 hover:scale-[1.01] transition-transform duration-700"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
