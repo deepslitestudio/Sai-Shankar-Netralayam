@@ -24,7 +24,7 @@ import GallerySection from './components/GallerySection';
 import TestimonialsSection from './components/TestimonialsSection';
 
 // Import assets
-import logoImage from './assets/images/hospital_logo_1782885175992.jpg';
+import logoImage from './assets/images/hospital_logo_new_1782972553082.jpg';
 import heroBgImage from './assets/images/hero_slit_lamp_1782885157457.jpg';
 import eyeSurgeryTrustSuccess from './assets/images/eye_surgery_trust_success_1782917986784.jpg';
 
